@@ -7,10 +7,15 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: USER-SERVICE
-          uri: http://localhost:8081/users
+        - id: catalog-server
+          uri: lb://catalog-server
           predicates:
-            - Path= /users/**
+            - Path= /pizzas/**
+        - id: ORDER-SERVER
+          uri: lb://ORDER-SERVER
+          predicates:
+              - Path= /orders/**
+
 eureka:
   client:
     register-with-eureka: true
